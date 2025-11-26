@@ -110,6 +110,14 @@ def load_data(filename):
             # Append Labels to List
             labels.append(bools[row['Revenue']])    
 
+        # Confirm data loaded in successfully:
+        if len(evidence) != len(labels):
+            sys.exit('Error when loading data! Evidence length does not match label length')
+
+        print('Data loaded successfully from csv file! Total lines: ', lines)
+
+        return evidence, labels
+
 
 def train_model(evidence, labels):
     """
