@@ -59,7 +59,47 @@ def load_data(filename):
     labels should be the corresponding list of labels, where each label
     is 1 if Revenue is true, and 0 otherwise.
     """
-    raise NotImplementedError
+
+    # Create list of lists for evidence, list for labels:
+    evidence = []
+    labels = []
+
+
+    # Open CSV file and load in data as dict:
+    with open(filename, newline='') as csvfile:
+        csvreader = csv.DictReader(csvfile, delimiter=',')
+        print('Loading Data from csv file...')
+        lines = 0
+        for row in csvreader:
+
+            lines += 1
+
+            line = []
+
+            # Append Evidence to List of Lists
+            line.append(int(row['Administrative']))
+            line.append(float(row['Administrative_Duration']))
+            line.append(int(row['Informational']))
+            line.append(float(row['Informational_Duration']))
+            line.append(int(row['ProductRelated']))
+            line.append(float(row['ProductRelated_Duration']))
+            line.append(float(row['BounceRates']))
+            line.append(float(row['ExitRates']))
+            line.append(float(row['PageValues']))
+            line.append(float(row['SpecialDay']))
+            # line.append(months[row['Month']])             // To implement 
+            line.append(int(row['OperatingSystems']))
+            line.append(int(row['Browser']))
+            line.append(int(row['Region']))
+            line.append(int(row['TrafficType']))
+            # line.append(visitors[row['VisitorType']])     // To implement 
+            # line.append(bools[row['Weekend']])            // To implement 
+
+            # Add evidence line to evidence                 // To implement 
+            evidence.append(line)
+
+            # Append Labels to List
+            # labels.append(bools[row['Revenue']])          // To implement 
 
 
 def train_model(evidence, labels):
