@@ -60,6 +60,15 @@ def load_data(filename):
     is 1 if Revenue is true, and 0 otherwise.
     """
 
+    # Dictionary Mapping Months to Numerical values
+    months = {'Jan': 0, 'Feb': 1, 'Mar': 2, 'Apr': 3, 'May': 4, 'June': 5, 'Jul': 6, 'Aug': 7, 'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dec': 11}
+
+    # Mapping Visitor Types to integers
+    visitors = {'Returning_Visitor': 1, 'New_Visitor': 0, 'Other': 0}
+
+    # Mapping Boolean Strings to integers
+    bools = {'TRUE': 1, 'FALSE': 0}
+
     # Create list of lists for evidence, list for labels:
     evidence = []
     labels = []
@@ -87,19 +96,19 @@ def load_data(filename):
             line.append(float(row['ExitRates']))
             line.append(float(row['PageValues']))
             line.append(float(row['SpecialDay']))
-            # line.append(months[row['Month']])             // To implement 
+            line.append(months[row['Month']])
             line.append(int(row['OperatingSystems']))
             line.append(int(row['Browser']))
             line.append(int(row['Region']))
             line.append(int(row['TrafficType']))
-            # line.append(visitors[row['VisitorType']])     // To implement 
-            # line.append(bools[row['Weekend']])            // To implement 
+            line.append(visitors[row['VisitorType']])  
+            line.append(bools[row['Weekend']])         
 
-            # Add evidence line to evidence                 // To implement 
+            # Add evidence line to evidence          
             evidence.append(line)
 
             # Append Labels to List
-            # labels.append(bools[row['Revenue']])          // To implement 
+            labels.append(bools[row['Revenue']])    
 
 
 def train_model(evidence, labels):
