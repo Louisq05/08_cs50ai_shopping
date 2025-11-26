@@ -9,15 +9,15 @@ TEST_SIZE = 0.4
 
 def main():
 
-    # Check command-line arguments
-    if len(sys.argv) not in [2, 3]:
-        sys.exit("Usage: python shopping.py data")
-    if len(sys.argv) == 3:
+    # Check command-line arguments                   must be 2 or 3 
+    if len(sys.argv) not in [2, 3]:                     
+        sys.exit("Usage: python shopping.py data")  # If Not 2 nor 3 : error
+    if len(sys.argv) == 3:                          # If 3 : user chooses k
         try:
             k = int(sys.argv[2])
         except ValueError:
             sys.exit("k setting must be an integer")
-    else:
+    else:                                           # If 1: default k = 1
         k = 1
 
 
@@ -134,8 +134,8 @@ def train_model(evidence, labels, k):
     Given a list of evidence lists and a list of labels, return a
     fitted k-nearest neighbor model (k=1) trained on the data.
     """
-    model = KNeighborsClassifier(n_neighbors=k)
-    model.fit(evidence, labels)
+    model = KNeighborsClassifier(n_neighbors=k)             # k-nearest neighbors classifier
+    model.fit(evidence, labels)                             # Training
 
     return model
 
@@ -161,15 +161,15 @@ def evaluate(labels, predictions):
     correct_positive = 0
     correct_negative = 0
 
-    for i in range(len(predictions)):
-        if predictions[i] == labels[i]:
-            if predictions[i] == 1:
-                correct_positive += 1
-            else:
-                correct_negative += 1
+    for i in range(len(predictions)):           # Iterate in prediction
+        if predictions[i] == labels[i]:         # If True prediction
+            if predictions[i] == 1:             # And positive
+                correct_positive += 1           # Increment true positive counter
+            else:                               # else (True negative)
+                correct_negative += 1           # Increment true negative counter
 
-    sensitivity = correct_positive / pos_labels
-    specificity = correct_negative / neg_labels
+    sensitivity = correct_positive / pos_labels # Sensitivity = correct positive over positive measurements
+    specificity = correct_negative / neg_labels # Sensitivity = correct negative over negative measurements
 
     return sensitivity, specificity
 
