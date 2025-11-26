@@ -12,6 +12,14 @@ def main():
     # Check command-line arguments
     if len(sys.argv) != 2:
         sys.exit("Usage: python shopping.py data")
+    if len(sys.argv) == 3:
+        try:
+            k = int(sys.argv[2])
+        except ValueError:
+            sys.exit("k setting must be an integer")
+    else:
+        k = 1
+
 
     # Load data from spreadsheet and split into train and test sets
     evidence, labels = load_data(sys.argv[1])
@@ -20,7 +28,7 @@ def main():
     )
 
     # Train model and make predictions
-    model = train_model(X_train, y_train)
+    model = train_model(X_train, y_train, k)
     predictions = model.predict(X_test)
     sensitivity, specificity = evaluate(y_test, predictions)
 
@@ -119,7 +127,9 @@ def load_data(filename):
         return evidence, labels
 
 
-def train_model(evidence, labels):
+def train_model(evidence, labels, k):
+
+    print("Fitting model using k-nearest neighbors classifier, with k=", k)
     """
     Given a list of evidence lists and a list of labels, return a
     fitted k-nearest neighbor model (k=1) trained on the data.
